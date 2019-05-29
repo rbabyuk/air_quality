@@ -1,0 +1,17 @@
+---
+- name: Install iotop
+  apt:
+    name: iotop
+    state: present
+- name: Install Telegraf packages
+  become: True
+  apt:
+    name: telegraf
+    state: present
+- name: Start the Telegraf service
+  become: True
+  service:
+    name: telegraf
+    state: restarted
+
+

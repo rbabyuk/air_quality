@@ -1,0 +1,23 @@
+---
+- name: install git
+  become: True
+  apt:
+    name: git
+    update_cache: yes
+- name: install vim
+  become: True
+  apt:
+    name: vim
+- name: install python-pip
+  become: True
+  apt:
+    name: python-pip
+# python-smbus i2c-tools
+- name: install python-smbus
+  become: True
+  apt:
+    name: python-smbus
+- name: install i2c-tools
+  become: True
+  apt:
+    name: i2c-tools
