@@ -1,0 +1,32 @@
+---
+- hosts: pi
+  remote_user: pi
+  become_user: root
+  become: true 
+  tasks:
+
+  ## Basic Setup ##
+#  - name: load config.yml
+#    include_vars:
+#      file: config.yml
+  - name: Install base packages
+    apt: name={{ item }} state=latest
+    with_items:
+      - vim
+      - unattended-upgrades
+      - apt-listchanges
+      - htop
+  - name: install bash aliases
+    template:
+      src: files/bash_aliases
+      dest: /home/pi/.bash_aliases
+      owner: pi
+      group: pi
+
+  ## Playbooks ##
+  - include: playbooks/base.yml
+  - include: playbooks/influx_db.yml
+  - include: playbooks/grafana.yml
+  - include: playbooks/telegraf.yml
+    become: true
+
