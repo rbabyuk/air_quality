@@ -1,0 +1,31 @@
+---
+- name: Update repositories cache and install "apt-transport-https" package
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+- name: Import bintray GPG pubkey
+  apt_key: 
+    url: https://bintray.com/user/downloadSubjectPublicKey?username=bintray
+    state: present
+- name: Adds bintray repo
+  # Add specified repository into sources list.
+  apt_repository:
+    repo: deb https://dl.bintray.com/fg2it/deb stretch main
+    state: present
+    filename: bintray.repo
+- name: Install Grafana packages
+  apt:
+    name: grafana
+    state: present
+- name: Start the Grafana-server service
+  become: True
+  service:
+    name: grafana-server
+    state: restarted
+    #  - name: Start the InfluxDB service
+    #    service:
+    #      name: influxdb
+    #      state: restarted
+
+
+
