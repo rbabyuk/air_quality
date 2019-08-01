@@ -28,5 +28,6 @@
   - include: playbooks/influx_db.yml
   - include: playbooks/grafana.yml
   - include: playbooks/telegraf.yml
+  - include: playbooks/air_quality.yml
     become: true
 
