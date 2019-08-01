@@ -1,0 +1,15 @@
+---
+- name: Update repositories cache and install "apt-transport-https" package
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+- name: Import InfluxDB GPG signing key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+- name: Adds influxDB repo
+  # Add specified repository into sources list.
+  apt_repository:
+    repo: deb https://repos.influxdata.com/debian stretch stable
+    state: present
+    filename: influxdb.repo
