@@ -1,18 +1,11 @@
 ---
-- name: install apache2
-  become: True
-  apt:
-    name: apache2
-    update_cache: yes
-- name: install sqlite3
-  become: True
-  apt:
-    name: sqlite3
+- name: Create influxdb database
+  influxdb_database:
+    database_name: "airquality"
 - name: clone airquality repo
   git: >
       repo=https://github.com/rbabyuk/air_quality.git
       dest=/home/pi/air/
-
 - name: create crontab entry for airquality script
   cron:
     name: "airquality job"
