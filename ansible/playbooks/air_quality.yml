@@ -5,7 +5,7 @@
 - name: clone airquality repo
   git: >
       repo=https://github.com/rbabyuk/air_quality.git
-      dest=/home/pi/air/
+      dest=/home/pi/air_quality
 - name: create crontab entry for airquality script
   cron:
     name: "airquality job"
